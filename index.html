@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compilers Helper</title>
+    <script>
+        function parseString() {
+            var inputString = document.getElementById("inputString").value;
+            var result = 's(T, ' + JSON.stringify(Array.from(inputString)).replaceAll("\"", "'") + ', []).';
+            document.getElementById("outputString").textContent = result;
+        }
+    </script>
+    <style>
+        * {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compilers Helper</h1>
+    <label for="inputString">Input String:</label>
+    <input type="text" id="inputString">
+    <button onclick="parseString()">Convert</button>
+    <br>
+    <label for="outputString">Output String:</label>
+    <pre id="outputString"></pre>
+</body>
+</html>
