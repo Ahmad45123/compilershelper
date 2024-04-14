@@ -5,7 +5,20 @@
     <script>
         function parseString() {
             var inputString = document.getElementById("inputString").value;
-            var result = 's(T, ' + JSON.stringify(Array.from(inputString)).replaceAll("\"", "'") + ', []).';
+            var arr = Array.from(inputString.replaceAll(/\s+/g, ""));
+            var result = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === '<' && arr[i + 1] === '=' && arr[i + 2] === '>') {
+                    result.push('<=>');
+                    i += 2;
+                } else if (arr[i] === '=' && arr[i + 1] === '>') {
+                    result.push('=>');
+                    i++;
+                } else {
+                    result.push(arr[i]);
+                }
+            }
+            var result = 's(T, ' + JSON.stringify(result).replaceAll("\"", "'") + ', []).';
             document.getElementById("outputString").textContent = result;
         }
     </script>
@@ -16,7 +29,7 @@
     </style>
 </head>
 <body>
-    <h1>Compilers Helper</h1>
+    <h1>Compilers Helper v2</h1>
     <label for="inputString">Input String:</label>
     <input type="text" id="inputString">
     <button onclick="parseString()">Convert</button>
